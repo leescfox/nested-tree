@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.service, .children {
+    padding-left: 20px;
+}
+
+.service-name {
+    position: relative;
+}
+
+.toggle-btn {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-color: rgb(107, 107, 107);
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    margin: 3.5px 0 0 -14px;
+    transform: rotate(45deg);
+    user-select: none;
+    cursor: pointer;
+}
+
+.hide-options .children {
+    display: none;
+}
+
+.hide-options .toggle-btn {
+    transform: rotate(-45deg);
+    margin-top: 5.5px;
+    margin-left: -16px;
+}
