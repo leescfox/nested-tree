@@ -1,115 +1,11 @@
-// {
-//     function insertService(element, array) {
-//         const elementNode = {
-//             element,
-//             children: element.node ? [] : null,
-//         }
-//         for (let i = 0; i < array.length; i++) {
-//             if (element.sorthead > array[i].element.sorthead) continue
-//             array.splice(i, 0, elementNode)
-//             return
-//         }
-//         array.push(elementNode)
-//     }
+import requestData from './data.js'
 
-//     const transformedData = []
-//     const sortedChildren = {}
-//     requestData.services.forEach((service) => {
-//         if (service.head === null) {
-//             insertService(service, transformedData)
-//             return
-//         }
-//         if (!sortedChildren[service.head]) {
-//             sortedChildren[service.head] = []
-//         }
-//         insertService(service, sortedChildren[service.head])
-//     })
-//     console.log(sortedChildren)
-// }
+const treeRoot = document.getElementsByClassName('tree')[0]
+buildTree()
 
-const requestData = {
-    services: [
-        {
-            id: 1,
-            head: null,
-            name: 'Проф.осмотр',
-            node: 0,
-            price: 100.0,
-            sorthead: 20,
-        },
-        {
-            id: 2,
-            head: null,
-            name: 'Хирургия',
-            node: 1,
-            price: 0.0,
-            sorthead: 10,
-        },
-        {
-            id: 3,
-            head: 2,
-            name: 'Удаление зубов',
-            node: 1,
-            price: 0.0,
-            sorthead: 10,
-        },
-        {
-            id: 4,
-            head: 3,
-            name: 'Удаление зуба',
-            node: 0,
-            price: 800.0,
-            sorthead: 10,
-        },
-        {
-            id: 5,
-            head: 3,
-            name: 'Удаление 8ого зуба',
-            node: 0,
-            price: 1000.0,
-            sorthead: 30,
-        },
-        {
-            id: 6,
-            head: 3,
-            name: 'Удаление осколка зуба',
-            node: 0,
-            price: 2000.0,
-            sorthead: 20,
-        },
-        {
-            id: 7,
-            head: 2,
-            name: 'Хирургические вмешательство',
-            node: 0,
-            price: 200.0,
-            sorthead: 10,
-        },
-        {
-            id: 8,
-            head: 2,
-            name: 'Имплантация зубов',
-            node: 1,
-            price: 0.0,
-            sorthead: 20,
-        },
-        {
-            id: 9,
-            head: 8,
-            name: 'Коронка',
-            node: 0,
-            price: 3000.0,
-            sorthead: 10,
-        },
-        {
-            id: 10,
-            head: 8,
-            name: 'Слепок челюсти',
-            node: 0,
-            price: 500.0,
-            sorthead: 20,
-        },
-    ],
+function buildTree() {
+    const transformedData = transformData()
+    transformedData.forEach((serviceObj) => insertNode(serviceObj, treeRoot))
 }
 
 function transformData() {
@@ -176,15 +72,3 @@ function createNode(service) {
     }
     return returnObj
 }
-
-function createChildrenContainer() {
-    const childrenContainer = document.createElement('div')
-    childrenContainer.classList.add('children')
-    return childrenContainer
-}
-
-const treeRoot = document.getElementsByClassName('tree')[0]
-const transformedData = transformData()
-transformedData.forEach((serviceObj) => insertNode(serviceObj, treeRoot))
-
-console.log(transformedData)
